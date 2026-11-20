@@ -1,6 +1,6 @@
 # 配置 / Configuration
 
-文件：`%LOCALAPPDATA%/ProjectPBZ/Saved/PBZSoulsMenu.ini`。首次启动时创建；也可提前复制包内 `settings.default.ini.example` 并改名。修改后完全退出并重新启动游戏。UTF-8；分号开头为注释；`true/false` 表示开关。已有文件不会被自动重写；新版本新增但未填写的项使用默认值。
+文件：`%LOCALAPPDATA%/ProjectPBZ/Saved/PBZSoulsMenu.cfg`。首次启动时创建；也可提前复制包内 `settings.default.ini.example` 并改名。修改后完全退出并重新启动游戏。UTF-8；分号开头为注释；`true/false` 表示开关。已有文件不会被自动重写；新版本新增但未填写的项使用默认值。
 
 | 分区 / Section | 配置项 / Key | 默认 / Default | 含义 / Meaning |
 | --- | --- | --- | --- |

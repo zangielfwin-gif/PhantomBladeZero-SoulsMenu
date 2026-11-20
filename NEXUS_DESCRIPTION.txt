@@ -41,7 +41,7 @@ Heybox: import the Heybox archive using the PhantomBladeZero extension, enable a
 Use one archive only. Fully restart the game; do not hot-reload this mod.
 
 [b]Configuration[/b]
-The first launch creates %LOCALAPPDATA%/ProjectPBZ/Saved/PBZSoulsMenu.ini.
+The first launch creates %LOCALAPPDATA%/ProjectPBZ/Saved/PBZSoulsMenu.cfg.
 Edit as UTF-8 and restart. Existing settings survive updates and uninstall.
 Combat accessories require both AllowInCombat=true and AllowAccessoryInCombat=true under [Menu]. Missing new options use their defaults, so an older INI does not need resetting.
 PauseGame=true enables pausing. AutoSwitchSkill=false disables the native current-slot ability request.
@@ -60,4 +60,4 @@ https://github.com/zangielfwin-gif/PhantomBladeZero-SoulsMenu
 https://github.com/zangielfwin-gif/PhantomBladeZero-SoulsMenu/releases/tag/v0.5.1
 
 中文安装要点：
-先安装PBZModLoader，关闭游戏后安装；两个压缩包只选择一个。首次启动生成Saved目录中的PBZSoulsMenu.ini，用记事本编辑后重启游戏。小黑盒包可直接导入，手动包把ProjectPBZ合并至游戏根目录。卸载时只移除本Mod，保留前置和个人配置。
+先安装PBZModLoader，关闭游戏后安装；两个压缩包只选择一个。首次启动生成Saved目录中的PBZSoulsMenu.cfg，用记事本编辑后重启游戏。小黑盒包可直接导入，手动包把ProjectPBZ合并至游戏根目录。卸载时只移除本Mod，保留前置和个人配置。

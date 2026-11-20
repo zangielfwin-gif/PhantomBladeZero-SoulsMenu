@@ -21,7 +21,7 @@
 首次启动后，配置文件位于：
 
 ```text
-%LOCALAPPDATA%\ProjectPBZ\Saved\PBZSoulsMenu.ini
+%LOCALAPPDATA%\ProjectPBZ\Saved\PBZSoulsMenu.cfg
 ```
 
 用记事本以 UTF-8 编辑，保存后完全重启游戏。更新不会覆盖已有个人设置；旧版配置缺少的新选项会使用默认值。绿色屏幕说明默认关闭。

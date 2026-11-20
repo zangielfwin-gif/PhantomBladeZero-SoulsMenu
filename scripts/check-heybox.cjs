@@ -20,9 +20,9 @@ async function run(){
         const wrapped=hey.map(f=>'User download/'+f),s=supported(wrapped);assert.equal(s.length,1);
         const p=await s[0].install(wrapped,'elsewhere');assert.deepEqual(p.instructions.filter(i=>i.type==='copy').map(i=>i.destination),copy.map(i=>i.destination));
     });
-    await test('a configuration example does not misclassify the JS mod as ReShade',()=>{assert(hey.some(f=>f.endsWith('.ini.example')));assert(!hey.some(f=>f.toLowerCase().endsWith('.ini')));assert(!handlers.find(h=>h.id==='4115450-binaries').check(hey,4115450).supported);});
+    await test('a configuration example does not misclassify the JS mod as ReShade',()=>{assert(hey.some(f=>f.endsWith('.cfg.example')));assert(!hey.some(f=>f.toLowerCase().endsWith('.ini')));assert(!handlers.find(h=>h.id==='4115450-binaries').check(hey,4115450).supported);});
     await test('the extension rejects these packages for another game ID',()=>{assert(handlers.every(h=>!h.check(hey,0).supported&&!h.check(nx,0).supported));});
-    const fixture=path.resolve(root,'.build/deploy-fixture'),sentinel=path.join(fixture,'ProjectPBZ/PBZModLoader/mods/OtherMod/main.js'),settings=path.join(fixture,'Saved/PBZSoulsMenu.ini');
+    const fixture=path.resolve(root,'.build/deploy-fixture'),sentinel=path.join(fixture,'ProjectPBZ/PBZModLoader/mods/OtherMod/main.js'),settings=path.join(fixture,'Saved/PBZSoulsMenu.cfg');
     fs.mkdirSync(path.dirname(sentinel),{recursive:true});fs.mkdirSync(path.dirname(settings),{recursive:true});fs.writeFileSync(sentinel,'unrelated');fs.writeFileSync(settings,'personal settings');
     const targets=[];
     for(const i of copy){const target=path.resolve(fixture,i.destination);assert(target.startsWith(fixture+path.sep));fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(path.join(heyRoot,i.source),target);targets.push(target);}

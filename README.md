@@ -43,10 +43,10 @@ Combat accessories use the original equip/unequip APIs and retain the game's slo
 首次启动会自动创建：
 
 ```text
-%LOCALAPPDATA%\ProjectPBZ\Saved\PBZSoulsMenu.ini
+%LOCALAPPDATA%\ProjectPBZ\Saved\PBZSoulsMenu.cfg
 ```
 
-完全退出游戏，用记事本以 UTF-8 编辑，保存后重新启动。**19 项配置**包括功能开关、按键、透明度与摇杆死区。缺少的项使用默认值；已有 INI 不会被更新覆盖。可提前复制包内 `settings.default.ini.example` 到上述位置，并改名为 `PBZSoulsMenu.ini`。
+完全退出游戏，用记事本以 UTF-8 编辑，保存后重新启动。**19 项配置**包括功能开关、按键、透明度与摇杆死区。缺少的项使用默认值；已有 INI 不会被更新覆盖。可提前复制包内 `settings.default.ini.example` 到上述位置，并改名为 `PBZSoulsMenu.cfg`。
 
 ```ini
 [General]

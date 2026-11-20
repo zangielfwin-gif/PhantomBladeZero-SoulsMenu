@@ -1,7 +1,7 @@
 "use strict";
 const config=require("./config");
 if(!config.enabled){
-    console.log("[PBZSoulsMenu] v0.5.1 disabled in PBZSoulsMenu.ini");
+    console.log("[PBZSoulsMenu] v0.5.1 disabled in PBZSoulsMenu.cfg");
     exports.stop=function(){};
 }else{
 console.log("[PBZSoulsMenu] v0.5.1 loader entry reached");

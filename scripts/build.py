@@ -19,7 +19,7 @@ for name in ['README.md', 'CONFIGURATION.md']:
 manifest = {
     'id': 'PBZSoulsMenu', 'name': 'PBZ SoulsMenu', 'version': VERSION,
     'gameBuild': META['gameBuild'], 'requires': ['PBZModLoader'],
-    'settings': 'GetProjectSavedDirectory()/PBZSoulsMenu.ini',
+    'settings': 'GetProjectSavedDirectory()/PBZSoulsMenu.cfg',
     'files': {name: hashlib.sha256(data).hexdigest() for name, data in sorted(payload.items())}
 }
 payload['manifest.json'] = (json.dumps(manifest, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
@@ -54,7 +54,7 @@ for kind, suffix, prefix in [
 
 for name in ['README.md', 'CONFIGURATION.md', 'NEXUS_DESCRIPTION.txt']:
     (DIST / name).write_bytes((ROOT / name).read_bytes())
-(DIST / 'PBZSoulsMenu.ini.example').write_bytes((MOD / 'settings.default.ini.example').read_bytes())
+(DIST / 'PBZSoulsMenu.cfg.example').write_bytes((MOD / 'settings.default.ini.example').read_bytes())
 checksums = [hashlib.sha256(f.read_bytes()).hexdigest() + '  ' + f.name for f in sorted(DIST.iterdir()) if f.is_file() and f.name != 'SHA256SUMS.txt']
 (DIST / 'SHA256SUMS.txt').write_text('\n'.join(checksums) + '\n', encoding='utf-8')
 print('Built version', VERSION)

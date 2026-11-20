@@ -19,7 +19,7 @@
 暂停、战斗换戒指、菜单内移动、槽位映射、切换能力、固定排序、隐藏按键、透明度及摇杆死区，都可编辑本地INI。绿色屏幕说明默认关闭。
 
 首次启动后配置位于：
-[code]%LOCALAPPDATA%\ProjectPBZ\Saved\PBZSoulsMenu.ini[/code]
+[code]%LOCALAPPDATA%\ProjectPBZ\Saved\PBZSoulsMenu.cfg[/code]
 
 用记事本以UTF-8编辑，保存后完全重启游戏。更新不会覆盖已有个人设置；旧配置缺少的新项使用默认值。
 战斗饰品换装需要[Menu]分区中的AllowInCombat=true与AllowAccessoryInCombat=true。

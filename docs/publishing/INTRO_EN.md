@@ -21,7 +21,7 @@ Nineteen settings cover pausing, combat accessories, menu movement, slot mapping
 The first launch creates:
 
 ```text
-%LOCALAPPDATA%\ProjectPBZ\Saved\PBZSoulsMenu.ini
+%LOCALAPPDATA%\ProjectPBZ\Saved\PBZSoulsMenu.cfg
 ```
 
 Edit as UTF-8, then fully restart the game. Existing settings survive updates. Missing options in an older INI use the defaults. Combat accessories require both `AllowInCombat=true` and `AllowAccessoryInCombat=true` under `[Menu]`.

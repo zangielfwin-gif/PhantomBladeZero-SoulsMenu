@@ -99,10 +99,13 @@ try{
     let dir=String(UE.KismetSystemLibrary.GetProjectSavedDirectory()||"");
     if(UE.BlueprintPathsLibrary&&typeof UE.BlueprintPathsLibrary.ConvertRelativePathToFull==="function")dir=String(UE.BlueprintPathsLibrary.ConvertRelativePathToFull(dir,""));
     if(!dir||/\/SaveGames(?:\/|$)/i.test(dir.replace(/\\/g,"/")))throw Error("invalid Saved directory");
-    settingsPath=dir.replace(/\\/g,"/").replace(/\/+$/,"")+"/PBZSoulsMenu.ini";
+    settingsPath=dir.replace(/\\/g,"/").replace(/\/+$/,"")+"/PBZSoulsMenu.cfg";
     const ref=puerts.$ref("");
-    if(UE.EasyCsv.LoadStringFromLocalFile(settingsPath,ref))values=parse(puerts.$unref(ref));
-    else if(!UE.EasyCsv.SaveStringToFileWithFullPath(TEMPLATE,settingsPath))log("could not create settings file; defaults used");
+    UE.EasyCsv.LoadStringFromLocalFile(settingsPath,ref);
+    const text=String(puerts.$unref(ref)||"");
+    const exists=!!(UE.BlueprintPathsLibrary&&UE.BlueprintPathsLibrary.FileExists&&UE.BlueprintPathsLibrary.FileExists(settingsPath));
+    if(text.trim())values=parse(text);
+    else if(!exists&&!UE.EasyCsv.SaveStringToFileWithFullPath(TEMPLATE,settingsPath))log("could not create settings file; defaults used");
     log("file="+settingsPath);
 }catch(error){log("read failed; defaults used: "+String(error));}
 const settings={settingsPath};

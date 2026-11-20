@@ -10,6 +10,6 @@
 作者：zangielfwin-gif
 需要：PBZModLoader；小黑盒扩展会统一检查UE4SS前置。
 安装：导入PBZ_SoulsMenu-0.5.1-Heybox.zip，启用并部署，完整重启游戏。
-配置：%LOCALAPPDATA%\ProjectPBZ\Saved\PBZSoulsMenu.ini，修改后重启。
+配置：%LOCALAPPDATA%\ProjectPBZ\Saved\PBZSoulsMenu.cfg，修改后重启。
 
 下载：https://github.com/zangielfwin-gif/PhantomBladeZero-SoulsMenu/releases/tag/v0.5.1

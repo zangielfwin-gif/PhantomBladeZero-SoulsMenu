@@ -1,15 +1,15 @@
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const file=path.join(__dirname,'../mod/PBZSoulsMenu/config.js'),source=fs.readFileSync(file,'utf8');
 const results=[];function test(name,fn){fn();results.push('PASS '+name);}
-function load(text,{saveFail=false,readThrow=false}={}){
+function load(text,{saveFail=false,readThrow=false,exists}={}){
     const logs=[],writes=[];let saved=text;
-    const UE={KismetSystemLibrary:{GetProjectSavedDirectory:()=> 'X:/User/Saved'},EasyCsv:{LoadStringFromLocalFile(p,r){if(readThrow)throw Error('read failed');if(saved===undefined)return false;r.value=saved;return true;},SaveStringToFileWithFullPath(t,p){writes.push({t,p});if(saveFail)return false;saved=t;return true;}}};
+    const UE={KismetSystemLibrary:{GetProjectSavedDirectory:()=> 'X:/User/Saved'},BlueprintPathsLibrary:{FileExists:()=>exists===undefined?saved!==undefined:exists},EasyCsv:{LoadStringFromLocalFile(p,r){if(readThrow)throw Error('read failed');if(saved===undefined)return false;r.value=saved;return true;},SaveStringToFileWithFullPath(t,p){writes.push({t,p});if(saveFail)return false;saved=t;return true;}}};
     const puerts={$ref:value=>({value}),$unref:r=>r.value},module={exports:{}};
     vm.runInNewContext('(function(module,require,console){'+source+'\n})') (module,id=>id==='ue'?UE:puerts,{log:s=>logs.push(s)});
     return {cfg:module.exports,logs,writes,get text(){return saved;}};
 }
-test('first launch creates a UTF-8 INI in Saved and retains accepted defaults',()=>{
-    const s=load();assert.equal(s.writes.length,1);assert.equal(s.cfg.settingsPath,'X:/User/Saved/PBZSoulsMenu.ini');
+test('first launch creates a UTF-8 CFG in Saved and retains accepted defaults',()=>{
+    const s=load();assert.equal(s.writes.length,1);assert.equal(s.cfg.settingsPath,'X:/User/Saved/PBZSoulsMenu.cfg');
     assert.equal(s.cfg.enabled,true);assert.equal(s.cfg.noPause,true);assert.equal(s.cfg.showNotifications,false);assert.equal(s.cfg.allowAccessoryInCombat,true);
     assert.equal(s.cfg.detailsGamepadKey,'Gamepad_LeftThumbstick');assert.equal(s.cfg.detailsMouseButton,'');
     assert(s.text.includes('[Weapons]'));assert(s.text.includes('ShowNotifications=false'));
@@ -34,6 +34,9 @@ test('invalid values fall back individually and preserve the original file',()=>
 test('disabled detail bindings are represented as empty strings',()=>{const s=load('[Input]\nToggleDetailsGamepad=None\nToggleDetailsKeyboard=None\nToggleDetailsMouse=None');for(const k of ['detailsGamepadKey','detailsKeyboardKey','detailsMouseButton'])assert.equal(s.cfg[k],'');});
 test('INI contents are parsed as data rather than evaluated as code',()=>{const s=load('[General]\nEnabled=(globalThis.secret=1)\n');assert.equal(s.cfg.enabled,true);assert.equal(s.writes.length,0);});
 test('file creation failure still provides usable defaults and a diagnostic',()=>{const s=load(undefined,{saveFail:true});assert.equal(s.cfg.enabled,true);assert(s.logs.some(l=>l.includes('could not create')));});
+test('an existing file that cannot be read is kept instead of overwritten',()=>{
+    const s=load(undefined,{exists:true});assert.equal(s.writes.length,0);assert.equal(s.cfg.enabled,true);
+});
 test('a read exception uses defaults without overwriting a file',()=>{const s=load('private',{readThrow:true});assert.equal(s.cfg.noPause,true);assert.equal(s.writes.length,0);assert.equal(s.text,'private');});
 test('master-disabled main never imports or patches the game classes',()=>{
     const module={exports:{}},imports=[];vm.runInNewContext('(function(module,exports,require,console){'+fs.readFileSync(path.join(__dirname,'../mod/PBZSoulsMenu/main.js'),'utf8')+'\n})')(module,module.exports,id=>{imports.push(id);assert.equal(id,'./config');return{enabled:false};},{log(){}});
